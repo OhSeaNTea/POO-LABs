@@ -1,0 +1,88 @@
+#include <iostream>
+#include <cstring>
+#include <fstream>
+using namespace std;
+struct dog{
+    char *name;
+    char *breed;
+    int age;
+};
+
+
+void swap(dog *a, dog *b) {
+    dog *temp = a;
+    a = b;
+    b = temp;
+}
+
+void Initializare(dog *caine){
+    string a, b;
+    cout << "\nIntrodu numele cainelui: \n";
+    cin >> a;
+    cout << "\nIntrodu rasa cainelui: \n";
+    cin >> b;
+    cout << "\nIntrodu varsta cainelui: \n"; 
+    cin>> caine->age;
+    caine->name = new char (a.length()+1); 
+    strcpy(caine->name, a.c_str());
+    caine->breed = new char (b.length()+1);
+    strcpy(caine->breed, b.c_str());
+}
+void Afisare(dog *caine) {
+cout << "\nNumele cainelui: \n" << caine->name;
+cout<<"\nRasa cainelui: \n" << caine->breed;
+cout << "\nVarsta cainelui\n" << caine->age;
+}
+void EliberareMemorie(dog *caine) {
+    delete caine->name;
+    caine->name=nullptr;
+    delete caine->breed;
+    caine->breed=nullptr;
+    caine->age=0;
+}
+int partition(dog *caine, int low, int high) {
+    dog pivot=caine[high];
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if (caine[j].age < pivot.age) {
+            i++;
+            swap(caine[i], caine[j]);
+        }else if (caine[j].age == pivot.age) {
+            if (caine[j].name < pivot.name) {
+                i++;
+                swap(caine[i], caine[j]);
+            }
+        }
+    }
+    swap(caine[i + 1], caine[high]);
+    return (i + 1);
+}
+void quickSort(dog caine[], int low, int high) {
+    if (low < high) {
+        int pi = partition(caine, low, high);
+        quickSort(caine, low, pi - 1);
+        quickSort(caine, pi + 1, high);
+    }
+}
+int main()
+{   cout << "Introduceti numarul de caini:\n";
+    int n;
+    cin >> n;
+    dog *caine = new dog[n];
+    for(int i=0;i<n;i++){
+        Initializare(&caine[i]);
+    }
+    cout << "Lista cainilor inaintea sortarii:\n";
+    for(int i=0;i<n;i++){
+        Afisare(&caine[i]);
+    }
+    quickSort(caine,0,n-1);
+    cout << "Lista cainilor sortati:\n";
+    for(int i=0;i<n;i++){
+        Afisare(&caine[i]);
+    }
+    for(int i=0;i<n;i++){
+        EliberareMemorie(&caine[i]);
+    }
+    return 0;
+}
