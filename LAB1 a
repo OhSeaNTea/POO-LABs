@@ -21,9 +21,9 @@ void Initializare(dog *caine){
     cin >> a;
     cout << "\nIntrodu rasa cainelui: \n";
     cin >> b;
-    cout << "\nIntrodu varsta cainelui: \n"; 
+    cout << "\nIntrodu varsta cainelui: \n";
     cin>> caine->age;
-    caine->name = new char (a.length()+1); 
+    caine->name = new char (a.length()+1);
     strcpy(caine->name, a.c_str());
     caine->breed = new char (b.length()+1);
     strcpy(caine->breed, b.c_str());
@@ -40,28 +40,36 @@ void EliberareMemorie(dog *caine) {
     caine->breed=nullptr;
     caine->age=0;
 }
-int partition(dog *caine, int low, int high) {
-    dog pivot=caine[high];
-    int i = (low - 1);
-    for (int j = low; j <= high - 1; j++) {
-        if (caine[j].age < pivot.age) {
-            i++;
-            swap(caine[i], caine[j]);
-        }else if (caine[j].age == pivot.age) {
-            if (caine[j].name < pivot.name) {
-                i++;
-                swap(caine[i], caine[j]);
-            }
-        }
+void heapify(dog arr[], int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    if (left < n && arr[left].age > arr[largest].age)
+        largest = left;
+    if (right < n && arr[right].age > arr[largest].age)
+        largest = right;
+    if (left < n && arr[left].age == arr[largest].age &&
+        strcmp(arr[left].name, arr[largest].name) > 0)
+        largest = left;
+    if (right < n && arr[right].age == arr[largest].age &&
+        strcmp(arr[right].name, arr[largest].name) > 0)
+        largest = right;
+    if (largest != i) {
+        dog temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, n, largest);
     }
-    swap(caine[i + 1], caine[high]);
-    return (i + 1);
 }
-void quickSort(dog caine[], int low, int high) {
-    if (low < high) {
-        int pi = partition(caine, low, high);
-        quickSort(caine, low, pi - 1);
-        quickSort(caine, pi + 1, high);
+void heapSort(dog arr[], int n) {
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+    for (int i = n - 1; i > 0; i--) {
+        dog temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+
+        heapify(arr, i, 0);
     }
 }
 int main()
@@ -72,12 +80,12 @@ int main()
     for(int i=0;i<n;i++){
         Initializare(&caine[i]);
     }
-    cout << "Lista cainilor inaintea sortarii:\n";
+    cout << "\nLista cainilor inaintea sortarii:";
     for(int i=0;i<n;i++){
         Afisare(&caine[i]);
     }
-    quickSort(caine,0,n-1);
-    cout << "Lista cainilor sortati:\n";
+    heapSort(caine,n);
+    cout << "\n\nLista cainilor sortati:";
     for(int i=0;i<n;i++){
         Afisare(&caine[i]);
     }
