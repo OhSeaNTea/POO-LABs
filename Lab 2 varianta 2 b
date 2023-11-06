@@ -40,7 +40,6 @@ class Matrix{
                 else{
                     cin >> values[i * columns + j];
                 }
-                    
             }
         }
     }
@@ -51,12 +50,7 @@ class Matrix{
         }
         for(int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
-                    if(rows<columns){
-                    cout << values[i * rows + j] << " ";
-                }
-                else{
-                    cout << values[i * columns + j] << " ";
-                }
+                cout << values[i * columns + j] << " ";
             }
             cout << endl;
         }
@@ -70,23 +64,23 @@ class Matrix{
         }
     }
     
-    void Adunare(Matrix *M1, Matrix *M2){
+    void Adunarre(Matrix *M1, Matrix *M2){
         double *values1 = M1->values;
         double *values2 = M2->values;
         double* values = new double[rows * columns];
         int error_code;
-        this->error_code=error_code;
+        this->error_code = error_code;
         this->values = values;
         if (M1->rows==M2->rows && M1->columns==M2->columns){
-            error_code==0;
+            error_code=0;
             for(int i=0; i<rows; i++){
                 for(int j=0; j<columns; j++){
                     values[i * columns + j] = values1[i * columns + j]+values2[i * columns + j];
                 }
             }
         }else{
-            error_code = 1;
-            cout << "Eroare la adunare" << error_code<< endl;
+            error_code = 1; 
+            cout << "Eroare la adunare"<< endl;
         }
     }
 
@@ -95,10 +89,10 @@ class Matrix{
         double *values2 = M2->values;
         double* values = new double[rows * columns];
         int error_code;
-        this->error_code=error_code;
+        this->error_code = error_code;
         this->values = values;
         if (M1->rows==M2->rows && M1->columns==M2->columns){
-            error_code==0;
+            error_code=0;
             for(int i=0; i<rows; i++){
                 for(int j=0; j<columns; j++){
                     values[i * columns + j] = values1[i * columns + j]*values2[i * columns + j];
@@ -108,7 +102,6 @@ class Matrix{
             error_code = 1; 
             cout << "Eroare la inmultire" << endl;
         }
-        
     }
     
     void Scadere(Matrix *M1, Matrix *M2){
@@ -119,7 +112,7 @@ class Matrix{
         this->error_code = error_code;
         this->values = values;
         if (M1->rows==M2->rows && M1->columns==M2->columns){
-            error_code==0;
+            error_code=0;
             for(int i=0; i<rows; i++){
                 for(int j=0; j<columns; j++){
                     values[i * columns + j] = values1[i * columns + j]-values2[i * columns + j];
@@ -129,7 +122,6 @@ class Matrix{
             error_code = 1; 
             cout << "Eroare la scadere"<< endl;
         }
-        
     }
     
     void SetSize(int rows, int columns){
@@ -146,7 +138,6 @@ class Matrix{
     void Error(){
         cout << "Codul erorii: " << error_code << endl;
     }
-    
 };
 
 int main()
@@ -167,7 +158,6 @@ int main()
     M2.SetSize(n,m);
     M3.SetSize(n,m);
     M4.SetSize(n,m);
-    
     M.setMatrix();
     M1.setMatrix();
     cout << "Prima matrice introdusa" << endl;
@@ -183,13 +173,12 @@ int main()
     M3.printMatrix();
     cout << "Rezultatele scaderii" << endl;
     M4.printMatrix();
+    M4.Error();
     double scalar;
     cout << "Ce numar doresti sa inmultiti matricea cu:" << endl;
     cin >> scalar;
     M.inmultireScalar(scalar);
     cout << "Rezultatele inmultirii cu scalarul" << endl;
     M.printMatrix();
-    M2.Error();
-   
     return 0;
 }
