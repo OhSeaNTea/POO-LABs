@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+class Time{
+    public:
+        int hour;
+        int minutes;
+        int seconds;
+   
+    Time(int hour, int minutes, int seconds){
+        this->hour = hour;
+        this->minutes = minutes;
+        this->seconds = seconds;
+    }
+
+    Time(){     
+    }
+
+  void setTime(){
+        int hour = -1;
+        int minutes = -1;
+        int seconds = -1;
+        while(hour<0 || hour>23){
+            cout << "Introduceti ora: ";
+            cin >> hour;
+            if(hour<0 || hour>23){
+                cout << "Ora trebuie sa fie un numar intre 0 si 23" << endl;
+            }
+        }
+       
+        while(minutes<0 || minutes>59){
+            cout << "Introduceti minutele: ";
+            cin >> minutes;
+            if(minutes<0 || minutes>59){
+                cout << "Minule trebuie sa fie o valoare intre 0 si 59" << endl;
+            }
+        }
+       
+        while(seconds<0 || seconds>59){
+            cout << "Introduceti secundele: ";
+            cin >> seconds;
+            if(seconds<0 || seconds>59){
+                cout << "Secundele trebuie sa fie o valoare intre 0 si 59" << endl;
+            }
+        }
+
+        this->hour = hour;
+        this->minutes = minutes;
+        this->seconds = seconds;
+    }
+
+    void showMilitaryTime(){
+        this->hour = hour;
+        this->minutes = minutes;
+        this->seconds = seconds;       
+        cout << "ora " << hour << " si " << minutes << " minute si " << seconds << " secunde" << endl;;
+    }
+
+    void showMeridiemTime(){
+        this->hour = hour;
+        this->minutes = minutes;
+        this->seconds = seconds;
+        if(hour<13){
+            cout << hour << " AM";
+        }else{
+            cout << hour-12 << "PM";
+        }
+        cout <<" si " << minutes << " minute si " << seconds << " secunde" << endl;;
+    }
+   
+};
+
+int main(){
+    Time t;
+    t.setTime();
+    t.showMilitaryTime();
+    t.showMeridiemTime();
+    return 0;
+}
