@@ -1,1 +1,195 @@
+#include <iostream>
 
+using namespace std;
+
+class Matrix{
+    public:
+    double* values;
+    int columns;
+    int rows;
+    int error_code;
+        Matrix(){
+            error_code = 0;
+    }
+   
+    Matrix(int rows) {
+        this->rows = rows;
+        columns = rows;
+        values = new double[rows * columns];
+        error_code = 0;
+    }  
+       
+    Matrix(int rows, int columns) {
+        this->rows = rows;
+        this->columns = columns;
+        values = new double[rows * columns];
+        error_code = 0;
+    }
+   
+    ~Matrix() {
+        delete[] values;
+    }
+   
+    void setMatrix(){
+        cout << "Introdu valorile matricii:" << endl;
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                if(rows<columns){
+                    cin >> values[i * rows + j];
+                }
+                else{
+                    cin >> values[i * columns + j];
+                }
+                    
+            }
+        }
+    }
+    
+    void printMatrix(){
+        if(error_code>0){
+            return;
+        }
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                    if(rows<columns){
+                    cout << values[i * rows + j] << " ";
+                }
+                else{
+                    cout << values[i * columns + j] << " ";
+                }
+            }
+            cout << endl;
+        }
+    }
+    
+    void inmultireScalar(int a){
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<columns; j++){
+                values[i * columns + j] = a*values[i * columns + j];
+            }
+        }
+    }
+    
+    void Adunare(Matrix *M1, Matrix *M2){
+        double *values1 = M1->values;
+        double *values2 = M2->values;
+        double* values = new double[rows * columns];
+        int error_code;
+        this->error_code=error_code;
+        this->values = values;
+        if (M1->rows==M2->rows && M1->columns==M2->columns){
+            error_code==0;
+            for(int i=0; i<rows; i++){
+                for(int j=0; j<columns; j++){
+                    values[i * columns + j] = values1[i * columns + j]+values2[i * columns + j];
+                }
+            }
+        }else{
+            error_code = 1;
+            cout << "Eroare la adunare" << error_code<< endl;
+        }
+    }
+
+    void Inmultire(Matrix *M1, Matrix *M2){
+        double *values1 = M1->values;
+        double *values2 = M2->values;
+        double* values = new double[rows * columns];
+        int error_code;
+        this->error_code=error_code;
+        this->values = values;
+        if (M1->rows==M2->rows && M1->columns==M2->columns){
+            error_code==0;
+            for(int i=0; i<rows; i++){
+                for(int j=0; j<columns; j++){
+                    values[i * columns + j] = values1[i * columns + j]*values2[i * columns + j];
+                }
+            }
+        }else{
+            error_code = 1; 
+            cout << "Eroare la inmultire" << endl;
+        }
+        
+    }
+    
+    void Scadere(Matrix *M1, Matrix *M2){
+        double *values1 = M1->values;
+        double *values2 = M2->values;
+        double* values = new double[rows * columns];
+        int error_code;
+        this->error_code = error_code;
+        this->values = values;
+        if (M1->rows==M2->rows && M1->columns==M2->columns){
+            error_code==0;
+            for(int i=0; i<rows; i++){
+                for(int j=0; j<columns; j++){
+                    values[i * columns + j] = values1[i * columns + j]-values2[i * columns + j];
+                }
+            }
+        }else{
+            error_code = 1; 
+            cout << "Eroare la scadere"<< endl;
+        }
+        
+    }
+    
+    void SetSize(int rows, int columns){
+        this->rows = rows;
+        this->columns = columns;
+        values = new double[rows * columns];
+    }
+    
+    void ReturnSize(){
+        cout << "Randuri: " << rows << endl;
+        cout << "Coloane: " << columns <<  endl;
+    }
+    
+    void Error(){
+        cout << "Codul erorii: " << error_code << endl;
+    }
+    
+};
+
+int main()
+{
+    int m,n,x;
+    cout << "Introduce numarul de randuri" << endl;
+    cin >> n;
+    cout << "Introduce numarul de coloane" << endl;
+    cin >> m;
+    Matrix M(n,m);
+    M.ReturnSize();
+    cout << "Introduce numarul de coloane*randuri pentru matricea 2" << endl;
+    cin >> x;
+    Matrix M1(x);
+    Matrix M2;
+    Matrix M3;
+    Matrix M4;
+    M2.SetSize(n,m);
+    M3.SetSize(n,m);
+    M4.SetSize(n,m);
+    
+    M.setMatrix();
+    M1.setMatrix();
+    cout << "Prima matrice introdusa" << endl;
+    M.printMatrix();
+    cout << "A doua matrice introdusa" << endl;
+    M1.printMatrix();
+    M2.Adunare(&M, &M1);
+    M3.Inmultire(&M, &M1);
+    M4.Scadere(&M, &M1);
+    cout << "Rezultatele adunarii" << endl;
+    M2.printMatrix();
+    cout << "Rezultatele inmultirii" << endl;
+    M3.printMatrix();
+    cout << "Rezultatele scaderii" << endl;
+    M4.printMatrix();
+    double scalar;
+    cout << "Ce numar doresti sa inmultiti matricea cu:" << endl;
+    cin >> scalar;
+    M.inmultireScalar(scalar);
+    cout << "Rezultatele inmultirii cu scalarul" << endl;
+    M.printMatrix();
+    M2.Error();
+   
+    return 0;
+}
