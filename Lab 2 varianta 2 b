@@ -64,7 +64,7 @@ class Matrix{
         }
     }
     
-    void Adunarre(Matrix *M1, Matrix *M2){
+    void Adunare(Matrix *M1, Matrix *M2){
         double *values1 = M1->values;
         double *values2 = M2->values;
         double* values = new double[rows * columns];
