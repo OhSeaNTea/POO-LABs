@@ -53,7 +53,7 @@ class Time{
         this->hour = hour;
         this->minutes = minutes;
         this->seconds = seconds;       
-        cout << "ora " << hour << " si " << minutes << " minute si " << seconds << " secunde" << endl;;
+        cout << "ora " << hour << " si " << minutes << " minute si " << seconds << " secunde" << endl;
     }
 
     void showMeridiemTime(){
@@ -65,7 +65,7 @@ class Time{
         }else{
             cout << hour-12 << "PM";
         }
-        cout <<" si " << minutes << " minute si " << seconds << " secunde" << endl;;
+        cout <<" si " << minutes << " minute si " << seconds << " secunde" << endl;
     }
    
 };
