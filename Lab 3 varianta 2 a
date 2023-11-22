@@ -1,0 +1,94 @@
+#include <iostream>
+
+using namespace std;
+
+class DoiD{
+    public:
+    double x;
+    double y;
+
+    DoiD(){
+        x = 0;
+        y = 0;
+    }
+
+    DoiD(double z){
+        x = z;
+        y = z;
+    }
+   
+    DoiD(double x, double y){
+        this->x = x;
+        this->y = y;
+    }
+
+    bool operator<(const DoiD& other){
+        if(x<other.x && y<other.y){
+            return true;
+        }
+        return false;
+    }
+       
+    bool operator>(const DoiD& other){
+        if(x>other.x && y>other.y){
+            return true;
+        }
+        return false;
+    }
+   
+    DoiD& operator=(const DoiD& other){
+        this->x=other.x;
+        this->y=other.y;
+        return *this;
+    }
+    friend DoiD operator+(DoiD d1, DoiD d2);
+    friend DoiD operator-(DoiD d1, DoiD d2);
+   
+};
+    DoiD operator+(DoiD d1, DoiD d2){
+        DoiD result;
+        result.x = d1.x+d2.x;
+        result.y = d1.y+d2.y;
+        return result;
+    }
+   
+    DoiD operator-(DoiD d1, DoiD d2){
+        DoiD result;
+        result.x = d1.x-d2.x;
+        result.y = d1.y-d2.y;
+        return result;
+    }
+int main()
+{
+  
+    int n, m, var;
+    cout << "Introduceti x-ul si y-ul pentru primul vector\n";
+    cin >> n >> m;
+    DoiD a(n,m);
+    cout << "Introduceti x-ul si y-ul pentru al doilea vector\n";
+    cin >>  n >> m;
+    DoiD b(n,m);
+    if(a>b){
+        cout<<"primul vector este mai mare\n";
+    }
+    if(a<b){
+        cout<<"al doilea este mai mare\n";
+    }
+    DoiD c;  
+    c=a+b;
+    cout <<"Fie vectorul nr.3 egal cu:\n";
+    cout <<"1. Suma coordonatelor primilor 2 vectori:\n" << c.x << " " << c.y << endl;
+    c=a-b;
+    cout <<"2. Diferenta coordonatelelelor acestora:\n" << c.x << " " << c.y << endl;
+    c=a;
+    cout <<"3. Egal cu primul vector:\n" << c.x << " " << c.y << endl;
+    cout <<"Cu ce numar doriti sa adunati vectorul 3?\n";
+    cin >> var;
+    c=c+var;
+    cout << c.x << " " << c.y << endl;
+    cout <<"Cu ce numar doriti sa scadeti vectorul 3?\n";
+    cin >> var;
+    c=c-var;
+    cout << c.x << " " << c.y << endl;
+    return 0;
+}
