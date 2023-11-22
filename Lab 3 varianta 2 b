@@ -1,0 +1,167 @@
+#include <iostream>
+using namespace std;
+class Stiva{
+    private:
+        int size;
+        double *number = new double(size);
+    
+    public:
+    Stiva(int size=1){
+        this->size=size;
+        double *number = new double(size);
+    }
+   
+    Stiva& operator=(const Stiva& other){
+        this->size=other.size;
+        this->number=other.number;
+        return *this;
+    }
+   
+    Stiva& operator+(const Stiva& other){
+        int a=size;
+        int b=other.size;
+        this->size=size+other.size;
+        int i;
+        for(i=0;i<a;i++){
+            number[i]=number[i];
+        }
+        for(int j=0;j<b;j++){
+            number[i]=other.number[j];
+            i++;
+        }
+       
+       
+        return *this;
+    }
+   
+    Stiva& operator()(int n){
+        int j=0;
+        for(int i=size-n;i<size;i++){
+            number[j]=number[i];
+            j++;
+        }
+        this->number=number;
+        this->size=n;
+        return *this;
+    }
+   
+    ~Stiva(){
+        this->number=NULL;
+    }
+   
+    friend bool operator==(Stiva S1, Stiva S2);
+    friend bool operator!=(Stiva S1, Stiva S2);
+    friend bool operator<(Stiva S1, Stiva S2);
+    friend bool operator>(Stiva S1, Stiva S2);
+    friend ostream& operator<<(ostream& os, const Stiva& S);
+    friend istream& operator>>(istream& is, const Stiva& S);
+   
+};
+    double NormaStiva(int n, double *d){
+        double Norm=0;
+        for(int i=0;i<n;i++){
+            Norm+=abs(d[i]);
+        }
+        return Norm;
+    }
+   
+    bool operator==(Stiva S1, Stiva S2){
+        if(S1.size!=S2.size){
+            return false;
+        }
+       
+        for(int i=0;i<S1.size;i++){
+            if(S1.number[i]!=S2.number[i]){
+                return false;
+            }  
+        }
+        return true;
+    }
+   
+    bool operator!=(Stiva S1, Stiva S2){
+        if(S1.size!=S2.size)
+        {
+            return true;
+        }
+        for(int i=0;i<S1.size;i++){
+            if(S1.number[i]!=S2.number[i]){
+                return true;
+            }  
+        }
+        return false;
+    }
+   
+    bool operator<(Stiva S1, Stiva S2){
+        double Sum1=NormaStiva(S1.size,S1.number);
+        double Sum2=NormaStiva(S2.size,S2.number);
+        cout <<"Norma stivei 1:" << Sum1 << "\nNorma stivei 2: " << Sum2 << endl;
+        if(Sum1<Sum2){
+            return true;
+        }
+        return false;
+    }
+   
+    bool operator>(Stiva S1, Stiva S2){
+        double Sum1=NormaStiva(S1.size,S1.number);
+        double Sum2=NormaStiva(S2.size,S2.number);
+        if(Sum1>Sum2){
+            return true;
+        }
+        return false;
+    }
+   ostream& operator<<(ostream& os, const Stiva& S)
+{
+    for(int i=S.size;i>0;i--){
+        os << S.number[i-1] << endl;  
+    }
+    return os;
+}
+
+   istream& operator>>(istream& is, const Stiva& S)
+{  
+    for(int i=0;i<S.size;i++){
+        is >> S.number[i];  
+    }
+    return is;
+}
+   
+int main() {
+    int n,m;
+    cout << "Ce marime doriti sa aiba prima stiva:\n";
+    cin >> n;
+    cout << "Ce marime doriti sa aiba a doua stiva:\n";
+    cin >> m;
+    Stiva S1(n),S2(m), S3, S4;
+    cout << "Introduceti elementele primei stive:\n";
+    cin >> S1;
+    cout << "Introduceti elementele stivei nr 2:\n";
+    cin >> S2;
+    cout << "Prima stiva introdusa:\n " << S1;
+    cout << "A doua stiva introdusa:\n " << S2;
+    cout << "Fie o stiva nr 3 egala cu elementele stivei nr 1 si 2:\n";
+    S3=S1+S2;
+    cout << S3;
+    int i;
+    cout << "Cate elemente doriti stiva 3 sa mentina:\n";
+    cin >> i;
+    S4=S3(i);
+    cout << S4;
+    cout << "Valorile de adevar dintre primele 2 stive:\n";
+    if(S1==S2){
+        cout<< "Stivele sunt egale\n";
+    }else{
+        cout<< "Stivele nu sunt egale\n";
+    }
+    if(S1!=S2){
+        cout<< "Stivele nu sunt egale\n";
+    }else{
+        cout<< "Stivele sunt egale\n";
+    }
+    if(S1<S2){
+        cout<< "Stiva nr.1 este mai mica\n";
+    }
+    if(S1>S2){
+        cout<< "Stiva nr.1 este mai mare\n";
+    }
+    return 0;
+}
