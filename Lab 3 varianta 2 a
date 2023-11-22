@@ -43,8 +43,8 @@ class DoiD{
     }
     friend DoiD operator+(DoiD d1, DoiD d2);
     friend DoiD operator-(DoiD d1, DoiD d2);
-   
 };
+    
     DoiD operator+(DoiD d1, DoiD d2){
         DoiD result;
         result.x = d1.x+d2.x;
@@ -68,6 +68,7 @@ int main()
     cout << "Introduceti x-ul si y-ul pentru al doilea vector\n";
     cin >>  n >> m;
     DoiD b(n,m);
+
     if(a>b){
         cout<<"primul vector este mai mare\n";
     }
@@ -78,17 +79,22 @@ int main()
     c=a+b;
     cout <<"Fie vectorul nr.3 egal cu:\n";
     cout <<"1. Suma coordonatelor primilor 2 vectori:\n" << c.x << " " << c.y << endl;
+    
     c=a-b;
     cout <<"2. Diferenta coordonatelelelor acestora:\n" << c.x << " " << c.y << endl;
+    
     c=a;
     cout <<"3. Egal cu primul vector:\n" << c.x << " " << c.y << endl;
+    
     cout <<"Cu ce numar doriti sa adunati vectorul 3?\n";
     cin >> var;
     c=c+var;
     cout << c.x << " " << c.y << endl;
+    
     cout <<"Cu ce numar doriti sa scadeti vectorul 3?\n";
     cin >> var;
     c=c-var;
     cout << c.x << " " << c.y << endl;
+    
     return 0;
 }
