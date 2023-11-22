@@ -46,7 +46,7 @@ class Stiva{
     }
    
     ~Stiva(){
-        this->number=NULL;
+        delete[] number;
     }
    
     friend bool operator==(Stiva S1, Stiva S2);
