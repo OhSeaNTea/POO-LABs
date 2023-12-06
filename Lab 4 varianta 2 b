@@ -3,6 +3,7 @@
 using namespace std;
 
 class Camera{
+    protected:
     double aria;
    
     public:
@@ -12,7 +13,7 @@ class Camera{
    
     void SetAria(){
         double A;
-        cout << "Introdu suprafata camerei: \n";
+        cout << "Introdu suprafata camerei (metri patrati): \n";
         cin >> aria;
     }
    
@@ -21,17 +22,20 @@ class Camera{
     }
 };
 class Ap_O_Odaie:public Camera{
+    protected:
     double aria_bucatarie;
     int etaj;
    
     public:
-    Ap_O_Odaie(double A_buc=0, int etaj=0){
+    Ap_O_Odaie(double A_buc=0,double a=0, int etaj=0){
         aria_bucatarie=A_buc;
         this->etaj=etaj;
+        aria=a;
     }
+    
     void SetApartament(){
         SetAria();
-        cout << "Introdu suprafata bucatariei: \n";
+        cout << "Introdu suprafata bucatariei (metri patrati): \n";
         cin >> aria_bucatarie;
         cout << "Introdu etajul: \n";
         cin >> etaj;
@@ -45,30 +49,31 @@ class Ap_O_Odaie:public Camera{
         return etaj;  
     }
 };
+
 class Adresa : public Ap_O_Odaie{
     string adresa;
     public:
     Adresa(){
     }
+
     void SetAdresa(){
         cout << "Introdu adresa:\n";
         cin >> adresa;
     }
+    
     string GetAdresa(){
         return adresa;
     }
-
 };
+
 int main(){
-    Adresa Ad;
-    Ad.SetAdresa();
-    cout << Ad.GetAdresa();
-    Camera C;
-    Ap_O_Odaie A;
-    C.SetAria();
-    A.SetApartament();
-    cout << A.GetBucatarie() << endl;
-    cout << A.GetEtaj() << endl;
+    Ap_O_Odaie Ap1;
+    Adresa Adr;
+    Adr.SetAdresa();
+    
+    Adr.SetApartament();
+    cout <<"Adreasa\n" << Adr.GetAdresa()<<endl;
+    cout << "Aria Bucatariei:\n" << Adr.GetBucatarie() << endl;
+    cout << "Etajul:\n" << Adr.GetEtaj() << endl;
    
-    cout << C.GetAria();    
 }
