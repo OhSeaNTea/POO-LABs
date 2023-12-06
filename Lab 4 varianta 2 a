@@ -45,8 +45,7 @@ class Student{
         delete[] specs;
     }
 };
-    class Diploma : public Student{
-
+    class Diplomant : public Student{
         public:
         char* tema;
         Diploma(char* tema="???"){
@@ -62,7 +61,7 @@ class Student{
             strcpy(tema, a);
         }
        
-        ~Diploma(){
+        ~Diplomant(){
         delete[] tema;
         }
     };
@@ -95,7 +94,7 @@ class Student{
 int main(){
     Student St1("Mihai","Informatica",8,6.78);
     Student St2;
-    Diploma D1;
+    Diplomant D1;
     D1.SetDiploma();
     cout << D1.nume << endl;
     cout << D1.specs << endl;
