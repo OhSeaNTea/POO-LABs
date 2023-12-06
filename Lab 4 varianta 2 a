@@ -1,0 +1,113 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Student{
+    public:
+    char* nume;
+    char* specs;
+    int year;
+    double avg_grade;
+    Student(char* nume="???", char* specs="???", int year=1, double avg_grade=1){
+        this->nume = new char[strlen(nume) + 1];
+        strcpy(this->nume, nume);
+
+        this->specs=new char[strlen(specs) + 1];
+        strcpy(this->specs, specs);
+       
+        this->year=year;
+       
+        this->avg_grade=avg_grade;
+    }
+   
+    friend void operator!=(const Student& St1, const Student& St2);
+   
+    void SetData(){
+        cout << "Introdu numele studentului:\n";
+        char a[25];
+        char b[25];
+        cin >> a;
+        nume = new char[strlen(a) + 1];
+        strcpy(nume, a);
+        cout << "Introdu specialitatea:\n";
+        cin >> b;
+        specs = new char[strlen(b) + 1];
+        strcpy(specs, b);
+       
+        cout << "Introdu anul universitar\n";
+        cin >> year;
+        cout << "Introdu balul mediu:\n";
+        cin >> avg_grade;
+    }
+
+
+    ~Student(){
+        delete[] nume;
+        delete[] specs;
+    }
+};
+    class Diploma : public Student{
+
+        public:
+        char* tema;
+        Diploma(char* tema="???"){
+            this->tema = new char[strlen(tema) + 1];
+            strcpy(this->tema, tema);
+        }
+        void SetDiploma(){
+            SetData();
+            cout << "Introdu tema diplomei:\n";
+            char a[25];
+            cin >> a;
+            tema = new char[strlen(a) + 1];
+            strcpy(tema, a);
+        }
+       
+        ~Diploma(){
+        delete[] tema;
+        }
+    };
+    void operator!=(const Student& St1, const Student& St2){
+        if(St1.year>St2.year){
+            cout << "Studentul unu este mai mare\n";
+        }
+        else{
+            if(St1.year<St2.year){
+                cout << "Studentul doi este mai mare\n";
+            }
+            else{
+                cout << "Stundetii sunt din acelasi an!\n";
+            }  
+        }
+       
+        if(St1.avg_grade>St2.avg_grade){
+            cout << "Studentul unu are o medie mai mare!\n";
+        }
+        else{
+            if(St1.avg_grade<St2.avg_grade){
+                cout << "Studentul doi are o medie mai mare!\n";
+            }    
+            else{
+                cout << "Studentii au medii egale!\n";    
+            }
+        }
+       
+    }
+int main(){
+    Student St1("Mihai","Informatica",8,6.78);
+    Student St2;
+    Diploma D1;
+    D1.SetDiploma();
+    cout << D1.nume << endl;
+    cout << D1.specs << endl;
+    cout << D1.year << endl;
+    cout << D1.avg_grade << endl;
+    cout << D1.tema << endl;
+    St2.SetData();
+    cout << St2.nume << endl;
+    cout << St2.specs << endl;
+    cout << St2.year << endl;
+    cout << St2.avg_grade << endl;
+    St1!=St2;
+
+ return 0;
+}
