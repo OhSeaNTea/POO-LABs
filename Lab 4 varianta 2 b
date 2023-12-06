@@ -67,7 +67,6 @@ class Adresa : public Ap_O_Odaie{
 };
 
 int main(){
-    Ap_O_Odaie Ap1;
     Adresa Adr;
     Adr.SetAdresa();
     
