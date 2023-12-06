@@ -7,7 +7,7 @@ class Student{
     char* specs;
     int year;
     double avg_grade;
-    Student(char* nume="???", char* specs="???", int year=1, double avg_grade=1){
+    Student(const char* nume="???", const char* specs="???", int year=1, double avg_grade=1){
         this->nume = new char[strlen(nume) + 1];
         strcpy(this->nume, nume);
 
@@ -48,7 +48,7 @@ class Student{
     class Diplomant : public Student{
         public:
         char* tema;
-        Diploma(char* tema="???"){
+        Diplomant(const char* tema="???"){
             this->tema = new char[strlen(tema) + 1];
             strcpy(this->tema, tema);
         }
