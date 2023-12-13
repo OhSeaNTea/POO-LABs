@@ -1,0 +1,69 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Mamifere{
+    public:
+    int age;
+    void nastere(){
+        cout << "S-a nascut un animal!\n";
+    }
+    void alaptare(){
+        if(age<1){
+            cout << "Animalul este alaptat!\n";}
+        else{
+            cout << "Animalul isi alapteaza puii!\n";}
+        }
+   
+};
+
+class Reptile{
+    public:
+    void eclozare(){
+        cout << "Un animal a iesit din ou!\n";
+    }
+    void depune_oua(){
+        cout << "Animalul a depus oua!\n";
+    }
+   
+};
+
+class Ornitorinc: public Reptile, public Mamifere{
+    public:
+    char* nume;
+    Ornitorinc(const char *nume="",int age=0){
+        this->age=age;
+        this->nume = new char[strlen(nume) + 1];
+        strcpy(this->nume, nume);
+        if(age<1){
+            eclozare();}
+        else{
+            cout << "Un ornitorinc a fost introdus in lista!\n";
+        }
+
+       
+    }
+    void ageUp(int a=1){
+        age+=a;
+    }
+    ~Ornitorinc(){
+        cout<< nume << " a murit!\n";
+        delete[] nume;
+    }
+};
+
+int main(){
+    Ornitorinc O("Perry");
+    cout <<"Numele primului ornitorinc este "<< O.nume << endl;
+   
+    O.alaptare();
+    O.ageUp();
+    O.depune_oua();
+    cout <<"Numele ornitorinc nr.2 este "<< O.nume << endl;
+   
+    Ornitorinc O1("George");
+   
+    O.alaptare();
+    cout<<O.nume<<" "<< "are"<< O.age <<" ani\n";
+    return 0;
+}
