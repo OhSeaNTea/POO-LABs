@@ -14,7 +14,8 @@ class Mamifere{
         else{
             cout << "Animalul isi alapteaza puii!\n";}
         }
-   
+    ~Mamifere(){
+    }
 };
 
 class Reptile{
@@ -24,6 +25,8 @@ class Reptile{
     }
     void depune_oua(){
         cout << "Animalul a depus oua!\n";
+    }
+    ~Reptile(){
     }
    
 };
@@ -45,6 +48,7 @@ class Ornitorinc: public Reptile, public Mamifere{
     }
     void ageUp(int a=1){
         age+=a;
+        cout << this->nume << "a crescut cu "<< a <<" ani\n";
     }
     ~Ornitorinc(){
         cout<< nume << " a murit!\n";
@@ -57,13 +61,12 @@ int main(){
     cout <<"Numele primului ornitorinc este "<< O.nume << endl;
    
     O.alaptare();
-    O.ageUp();
+    O.ageUp(5);
     O.depune_oua();
-    cout <<"Numele ornitorinc nr.2 este "<< O.nume << endl;
-   
     Ornitorinc O1("George");
+    cout <<"Numele ornitorincului 2 este "<< O1.nume << endl;
    
     O.alaptare();
-    cout<<O.nume<<" "<< "are"<< O.age <<" ani\n";
+    cout<<O.nume<<" "<< "are "<< O.age <<" ani\n";
     return 0;
 }
