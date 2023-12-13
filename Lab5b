@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+class Animale{
+    int age;
+    public:
+    Animale(){
+    }
+    int getAge(){
+        return age;
+    }
+    void setAge(int a){
+        age=a;
+    }
+   void ageUp(int a=1){
+       age+=a;
+   }
+   
+};
+
+class Mamifere:public Animale{
+    public:
+    void birth(){
+        cout<<"Animalul a fost nascut!\n";
+        setAge(0);
+    }
+        void milk(){
+        if(getAge()<1){
+            cout << "Animalul este alaptat!\n";}
+        else{
+            cout << "Animalul isi alapteaza puii!\n";}
+        }
+    int MamGetAge(){
+        return getAge();
+    }
+    int MamSetAge(int a){
+        setAge(a);
+    }
+};
+
+class Reptile:public Animale{
+    public:
+    void hatch(){
+        cout<<"Animalul a iesit din ou!\n";
+    }
+    void egg(){
+        cout << "Animalul a depus oua!\n";
+    }
+    int RepGetAge(){
+        return getAge();
+    }
+    int RepSetAge(int a){
+        setAge(a);
+    }
+};
+class Ornitorinc:public Mamifere, public  Reptile{
+   public:
+   Ornitorinc(){
+       hatch();
+   }
+   ~Ornitorinc{
+       cout<< ornit
+   }
+};
+int main(){
+    Ornitorinc O;
+    O.egg();
+    O.MamSetAge(5);
+    O.MamGetAge();
+    O.milk();
+    return 0;
+}
