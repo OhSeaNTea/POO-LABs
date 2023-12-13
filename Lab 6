@@ -1,0 +1,117 @@
+#include <iostream>
+using namespace std;
+
+class Figure{
+    public:
+    virtual double Aria(){
+        cout<<"hi";
+        return 0;
+    }
+    virtual void Name(){
+        cout<<"figura";
+    }
+};
+
+class Square:public Figure{
+    double side;
+    public:
+    Square(double a=0){
+        if(a==0){
+            cout<<"Introduceti marginea patratului\n";
+            cin>>a;
+        }
+        side=a;
+    }
+    double Aria(){
+        return side*side;
+    }
+    void Name(){
+        cout<<"patrat";
+    }
+};
+
+class Circle:public Figure{
+    double radius;
+    public:
+    Circle(double r=0){
+        if(r==0){
+            cout<<"Introduceti raza cercului\n";
+            cin>>r;
+        }
+        radius=r;
+    }
+    double Aria(){
+        return 3.14*radius*radius;
+    }
+    void Name(){
+        cout<<"cerc";
+    }
+};
+
+class Triangle:public Figure{
+    double base;
+    double height;
+    public:
+    Triangle(double h=0,double b=0){
+        if(h==0){
+            cout<<"Introduceti inaltimea triunghiului\n";
+            cin>>h;
+        }
+        if(b==0){
+            cout<<"Introduceti lungimea bazei triunghiului\n";
+            cin>>b;
+        }
+        height=h;
+        base=b;
+    }
+    double Aria(){
+        return 0.5*base*height;
+    }
+    void Name(){
+        cout<<"triunghi";
+    }
+};
+
+class Trapeze:public Figure{
+    double base1;
+    double base2;
+    double height;
+    public:
+    Trapeze(double a=0,double b=0, double h=0){
+        if(a==0){
+            cout<<"Introduceti lungimea bazei nr.1 \n";
+            cin>>a;
+        }
+        if(b==0){
+            cout<<"Introduceti lungimea bazei nr.2 \n";
+            cin>>b;
+        }
+        if(h==0){
+            cout<<"Introduceti inaltimea trapezului\n";
+            cin>>h;
+        }
+        base1=a;
+        base2=b;
+        height=h;
+    }
+    double Aria(){
+        return (base1+base2)*height/2.0;
+    }
+    void Name(){
+        cout<<"trapez";
+    }
+};
+
+int main() {
+    Figure *F[4];
+    F[0]=new Square();
+    F[1]=new Circle();
+    F[2]=new Triangle();
+    F[3]=new Trapeze();
+    for(int i=0;i<4;i++){
+        cout<<"Aria pentru ";
+        F[i]->Name();
+        cout<<"="<<F[i]->Aria()<<endl;
+    }
+    return 0;
+}
