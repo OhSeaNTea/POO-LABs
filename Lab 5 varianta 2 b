@@ -1,19 +1,14 @@
 #include <iostream>
 using namespace std;
 class Animale{
+    protected:
     int age;
     public:
     Animale(){
     }
-    int getAge(){
-        return age;
+    void breathe(){
+        cout<<"Animalul respira\n";
     }
-    void setAge(int a){
-        age=a;
-    }
-   void ageUp(int a=1){
-       age+=a;
-   }
    
 };
 
@@ -21,19 +16,19 @@ class Mamifere:public Animale{
     public:
     void birth(){
         cout<<"Animalul a fost nascut!\n";
-        setAge(0);
+        age=0;
     }
         void milk(){
-        if(getAge()<1){
+        if(age<1){
             cout << "Animalul este alaptat!\n";}
         else{
             cout << "Animalul isi alapteaza puii!\n";}
         }
     int MamGetAge(){
-        return getAge();
+        return age;
     }
     int MamSetAge(int a){
-        setAge(a);
+        age+=a;
     }
 };
 
@@ -41,15 +36,16 @@ class Reptile:public Animale{
     public:
     void hatch(){
         cout<<"Animalul a iesit din ou!\n";
+        age=0;
     }
     void egg(){
         cout << "Animalul a depus oua!\n";
     }
     int RepGetAge(){
-        return getAge();
+        return age;
     }
     int RepSetAge(int a){
-        setAge(a);
+        age+=a;
     }
 };
 class Ornitorinc:public Mamifere, public  Reptile{
